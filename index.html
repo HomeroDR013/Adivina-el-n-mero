@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--Autor: Homero Díaz Romero-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adivina el número</title>
+    <link rel="stylesheet" href="Style/index.css"> <!--Cargar el estilo de la página-->
+</head>
+<body>
+    <div class="nav"> <!--Grupo de botones a la izquierda, sirven de menú-->
+        <button id="BtnIntro" class="nav__link" onclick="BIntro()">Explicación</button>
+        <button id="jn31" class="nav__link" onclick="LOC31()">1 al 31</button>
+        <button id="jn63" class="nav__link" onclick="LOC63()">1 al 63</button>
+        <button id="jn127" class="nav__link" onclick="LOC127()">1 al 127</button>
+    </div>
+    
+    <div id="app"> <!--Cuerpo principal de la página-->
+        <center>
+            <p id="Texto"> Elige una opción de la izquierda para jugar a adivinar el número <br>
+            Piensa en un número entre el rango elegido, y lo adivinaré</p>
+            <br>
+            <img id="Imag" src="">
+            <br>
+            <br>
+            <button id="BtnYes" class="btn_sel" onclick="BYes()" style="display: none;">Sí</button>
+            <button id="BtnNo" class="btn_sel" onclick="BNo()" style="display: none;">No</button>
+            <br>
+            <button id="BtnReset" class="btn_sel" onclick="Reset()" style="display: none;">Reiniciar</button>
+        </center>
+    </div>
+
+    <script>
+        var imgC = 1; //Contador para las imagenes
+        var imgL = 0; //Limite de las imagenes
+        var BtnS = 0; //Bandera de la selección de rango
+        var res = 0;  //Resultado, suma de los números de las imagenes con sí
+        var Sres = "Tu número es "; //String de ayuda para escribir el resultado
+
+        function BIntro(){ //Función que restablece la vista a la explicación que se muestra al inicio
+            //Se modifica el texto
+            document.getElementById("Texto").innerHTML = "Elige una opción de la izquierda para jugar a adivinar el número <br>";
+            document.getElementById("Texto").innerHTML += "Piensa en un número entre el rango elegido, y lo adivinaré";
+            //Se esconden la imagen y los botones
+            document.getElementById("Imag").style = "display: none";
+            document.getElementById("BtnYes").style = "display: none";
+            document.getElementById("BtnNo").style = "display: none";
+            document.getElementById("BtnReset").style = "display: none";
+        }
+        
+        function LOC31(){ //Función que establece la vista al inicio de adivinar un número entre 1 y 31
+            //Se modifica el texto
+            document.getElementById("Texto").textContent = "¿Tu número está en este grupo?";
+            //Se modifican las dimensiones de la imagen, y la imagen a mostrar
+            document.getElementById("Imag").width = "450";
+            document.getElementById("Imag").height = "300";
+            document.getElementById("Imag").src = "Imgs/31_1.png";
+            //Se muestran los botones
+            document.getElementById("BtnYes").style = "display: inline";
+            document.getElementById("BtnNo").style = "display: inline";
+            document.getElementById("BtnReset").style = "display: inline";
+            imgL = 5;  //Se establece el número de imagenes a mostrar
+            BtnS = 1;  //Se establece la bandera del rango seleccionado
+            imgC = 1;  //Se reinicia el valor del contador de imagenes
+            res = 0;   //Se reinicia el valor del resultado
+        }
+
+        function LOC63(){ //Función que establece la vista al inicio de adivinar un número entre 1 y 63
+            //Se modifica el texto
+            document.getElementById("Texto").textContent = "¿Tu número está en este grupo?";
+            //Se modifican las dimensiones de la imagen, y la imagen a mostrar
+            document.getElementById("Imag").width = "600";
+            document.getElementById("Imag").height = "300";
+            document.getElementById("Imag").src = "Imgs/63_1.png";
+            //Se muestran los botones
+            document.getElementById("BtnYes").style = "display: inline";
+            document.getElementById("BtnNo").style = "display: inline";
+            document.getElementById("BtnReset").style = "display: inline";
+            imgL = 6;  //Se establece el número de imagenes a mostrar
+            BtnS = 2;  //Se establece la bandera del rango seleccionado
+            imgC = 1;  //Se reinicia el valor del contador de imagenes
+            res = 0;   //Se reinicia el valor del resultado
+        }
+
+        function LOC127(){ //Función que establece la vista al inicio de adivinar un número entre 1 y 127
+            //Se modifica el texto
+            document.getElementById("Texto").textContent = "¿Tu número está en este grupo?";
+            //Se modifican las dimensiones de la imagen, y la imagen a mostrar
+            document.getElementById("Imag").width = "600";
+            document.getElementById("Imag").height = "450";
+            document.getElementById("Imag").src = "Imgs/127_1.png";
+            //Se muestran los botones
+            document.getElementById("BtnYes").style = "display: inline";
+            document.getElementById("BtnNo").style = "display: inline";
+            document.getElementById("BtnReset").style = "display: inline";
+            imgL = 7;  //Se establece el número de imagenes a mostrar
+            BtnS = 3;  //Se establece la bandera del rango seleccionado
+            imgC = 1;  //Se reinicia el valor del contador de imagenes
+            res = 0;   //Se reinicia el valor del resultado
+        }
+
+        function BYes(){ //Función que procesa el click del botón "Sí"
+            if(BtnS == 1){ //Se eligío el rango de 1-31
+                switch (imgC){ //Switch para ciclar a través de las imagenes y sumar al resultado
+                    case 1:
+                        res += 1;  //Suma al resultado
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/31_2.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 2:
+                        res += 2;  //Suma al resultado
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/31_3.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 3:
+                        res += 4;  //Suma al resultado
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/31_4.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 4:
+                        res += 8;  //Suma al resultado
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/31_5.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 5:
+                        res += 16; //Suma al resultado
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").style = "display: none"; //Se esconde la imagen
+                        document.getElementById("Texto").textContent = Sres+res; //Se muestra el resultado
+                    break;
+                }
+            }
+            else if(BtnS == 2){ //Se eligío el rango de 1-63
+                switch (imgC){ //Switch para ciclar a través de las imagenes y sumar al resultado
+                    case 1:
+                        res += 1;  //Suma al resultado
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/63_2.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 2:
+                        res += 2;  //Suma al resultado
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/63_3.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 3:
+                        res += 4;  //Suma al resultado
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/63_4.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 4:
+                        res += 8;  //Suma al resultado
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/63_5.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 5:
+                        res += 16; //Suma al resultado
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/63_6.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 6:
+                        res += 32; //Suma al resultado
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").style = "display: none"; //Se esconde la imagen
+                        document.getElementById("Texto").textContent = Sres+res; //Se muestra el resultado
+                    break;
+                }
+            }
+            else { //Se eligío el rango de 1-127
+                switch (imgC){ //Switch para ciclar a través de las imagenes y sumar al resultado
+                    case 1:
+                        res += 1;  //Suma al resultado
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/127_2.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 2:
+                        res += 2;  //Suma al resultado
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/127_3.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 3:
+                        res += 4;  //Suma al resultado
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/127_4.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 4:
+                        res += 8;  //Suma al resultado
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/127_5.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 5:
+                        res += 16; //Suma al resultado
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/127_6.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 6:
+                        res += 32; //Suma al resultado
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/127_7.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 7:
+                        res += 64; //Suma al resultado
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").style = "display: none"; //Se esconde la imagen
+                        document.getElementById("Texto").textContent = Sres+res; //Se muestra el resultado
+                    break;
+                }
+            }
+        }
+
+        function BNo(){ //Función que procesa el click del botón "No"
+            if(BtnS == 1){ //Se eligío el rango de 1-31
+                switch (imgC){ //Switch para ciclar a través de las imagenes y sumar al resultado
+                    case 1:
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/31_2.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 2:
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/31_3.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 3:
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/31_4.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 4:
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/31_5.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 5:
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").style = "display: none"; //Se esconde la imagen
+                        document.getElementById("Texto").textContent = Sres+res; //Se muestra el resultado
+                    break;
+                }
+            }
+            else if(BtnS == 2){ //Se eligío el rango de 1-63
+                switch (imgC){ //Switch para ciclar a través de las imagenes y sumar al resultado
+                    case 1:
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/63_2.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 2:
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/63_3.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 3:
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/63_4.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 4:
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/63_5.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 5:
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/63_6.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 6:
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").style = "display: none"; //Se esconde la imagen
+                        document.getElementById("Texto").textContent = Sres+res; //Se muestra el resultado
+                    break;
+                }
+            }
+            else { //Se eligío el rango de 1-127
+                switch (imgC){ //Switch para ciclar a través de las imagenes y sumar al resultado
+                    case 1:
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/127_2.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 2:
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/127_3.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 3:
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/127_4.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 4:
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/127_5.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 5:
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/127_6.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 6:
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").src = "Imgs/127_7.png"; //Se modifica la imagen mostrada
+                    break;
+
+                    case 7:
+                        imgC += 1; //Se aumenta el contador
+                        document.getElementById("Imag").style = "display: none"; //Se esconde la imagen
+                        document.getElementById("Texto").textContent = Sres+res; //Se muestra el resultado
+                    break;
+                }
+            }
+        }
+
+        function Reset(){
+            imgC = 1; //Se restablece el contador de imagenes
+            res = 0;  //Se restablece la suma del resultado
+            //Se modifica la imagen a la primera del rango correspondiente
+            if(BtnS == 1){document.getElementById("Imag").src = "Imgs/31_1.png";}
+            else if (BtnS == 2){document.getElementById("Imag").src = "Imgs/63_1.png";}
+            else {document.getElementById("Imag").src = "Imgs/127_1.png";}
+        }
+    </script>
+</body>
+</html>
